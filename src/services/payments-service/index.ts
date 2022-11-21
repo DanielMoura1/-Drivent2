@@ -23,7 +23,7 @@ async function Get(id: number) {
   const res = await paymentsRepository.GetPayment(id);
   return res;
 }
-async function GetE(id: number) {
+async function GetEnrollment(id: number) {
   const res = await paymentsRepository.GetPaymentCompare(id);
   return res;
 }
@@ -33,16 +33,12 @@ async function GetUser(token: string) {
 }
 async function getTickets(id: number, token: string): Promise<tickets> {
   const res = await paymentsRepository.getTickets(id);
-  console.log("res");
-  console.log(res);
+
   if(res.length===0) {
-    console.log("if erro");
     throw notFoundError();
   }
    
   const ok =await paymentsRepository.GetS(token);
-  console.log("ok");
-  console.log(ok);
   if(ok[0].id !==res[0].enrollmentId) {
     throw requestError(401, "abc");
   }
@@ -57,6 +53,6 @@ async function updatedPayment(id: number) {
   return res;
 }
 const paymentsService = {
-  Get, GetE, GetUser, getTickets, createPayments, updatedPayment
+  Get, GetEnrollment, GetUser, getTickets, createPayments, updatedPayment
 };
 export default paymentsService;

@@ -57,8 +57,6 @@ async function GetS(token: string) {
       token: token
     }
   });
-  console.log("n");
-  console.log(n);
   const res=await prisma.enrollment.findMany({
     where: {
       userId: n[0].userId-1
@@ -90,7 +88,6 @@ async function createPayments(body: body, ticket: tickets) {
       ticketId: body.ticketId
     }
   });
-  console.log(res);
   return res[0];
 }
 async function updated(id: number) {
